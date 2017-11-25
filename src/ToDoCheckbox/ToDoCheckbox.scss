@@ -1,28 +1,63 @@
 @import '../Variables.scss';
 
+$checkbox-size: 24px;
+$checkbox-color: $color-complement-1;
+$border-width: 2px;
+$border-radius: 3px;
+$border-color: $gray-primary-2;
+$background-color: $white;
+$glyph: '\2714';
+
+
 .ToDoCheckbox {
-  margin: 0;
+  display: inline-block;
+  margin: 3px 0.5ex;
   padding: 0;
+  width: $checkbox-size;
+  height: $checkbox-size;
+  vertical-align: middle;
 
   input {
-    display: none;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    outline: none;
+    position: absolute;
+    z-index: -1;
   }
 
   small {
-    display: block;
-    border: 1px solid #0f0f0f;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
+    display: inline-block;
+    overflow: hidden;
+  }
 
-    &:before {
-      display: block;
-      content: '';
-    }
+  input ~ small:before {
+    color: $checkbox-color;
+    display: block;
+    content: '';
+    cursor: pointer;
+    width: $checkbox-size;
+    height: $checkbox-size;
+    float: left;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    font-size: $checkbox-size;
+    line-height: $checkbox-size - ($border-width * 2);
+    background-color: $background-color;
   }
 
   input:checked ~ small:before {
-    content: "\2714";
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    content: $glyph;
+  }
+
+  input:disabled ~ small:before {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  input:disabled:checked ~ small:before {
+    cursor: default;
+    content: $glyph;
+    opacity: 0.5;
   }
 }
