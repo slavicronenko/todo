@@ -1,0 +1,23 @@
+@import '../Variables.scss';
+
+.ToDoListItem {
+  padding: 3px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  background-color: $color-secondary-1-0;
+
+  &__handler,
+  &__done,
+  &__text,
+  &__menu {
+    display: inline-block;
+  }
+
+  &__handler {
+    width: 20px;
+  }
+
+  &__text {
+    font-size: 12px;
+  }
+}

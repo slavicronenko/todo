@@ -1,0 +1,28 @@
+@import '../Variables.scss';
+
+.ToDoCheckbox {
+  margin: 0;
+  padding: 0;
+
+  input {
+    display: none;
+  }
+
+  small {
+    display: block;
+    border: 1px solid #0f0f0f;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+
+    &:before {
+      display: block;
+      content: '';
+    }
+  }
+
+  input:checked ~ small:before {
+    content: "\2714";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+  }
+}
