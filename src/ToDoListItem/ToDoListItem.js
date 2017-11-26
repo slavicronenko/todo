@@ -10,7 +10,7 @@ export default class ToDoListItem extends Component {
       <li className="ToDoListItem">
         <div className="ToDoListItem__handler"></div>
         <div className="ToDoListItem__done">
-          <ToDoCheckbox></ToDoCheckbox>
+          <ToDoCheckbox disabled={item.disabled} checked={item.checked}></ToDoCheckbox>
         </div>
         <div className="ToDoListItem__text">{item.text}</div>
         <div className="ToDoListItem__menu"></div>

@@ -5,10 +5,10 @@ import ToDoListItem from '../ToDoListItem';
 export default class ToDoList extends Component {
   render() {
     const list = [
-      {id: 0, text: 'Test 1'},
-      {id: 1, text: 'Test 2'},
-      {id: 2, text: 'Test 3'},
-      {id: 3, text: 'Test 4'},
+      {id: 0, text: 'do the dishes'},
+      {id: 1, text: 'learn English', disabled: true},
+      {id: 2, text: 'make todo app', checked: true},
+      {id: 3, text: 'something else', disabled: true, checked: true},
     ];
 
     return (

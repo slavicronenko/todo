@@ -2,7 +2,7 @@
 
 $checkbox-size: 24px;
 $checkbox-color: $color-complement-1;
-$border-width: 2px;
+$border-width: 1px;
 $border-radius: 3px;
 $border-color: $gray-primary-2;
 $background-color: $white;
@@ -39,6 +39,7 @@ $glyph: '\2714';
     width: $checkbox-size;
     height: $checkbox-size;
     float: left;
+    text-align: center;
     border: $border-width solid $border-color;
     border-radius: $border-radius;
     font-size: $checkbox-size;
