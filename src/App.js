@@ -9,6 +9,18 @@ import {
 } from 'react-bootstrap';
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toDoItems: [
+        {id: 0, text: 'do the dishes'},
+        {id: 1, text: 'learn English', disabled: true},
+        {id: 2, text: 'make todo app', checked: true},
+        {id: 3, text: 'something else', disabled: true, checked: true},
+      ]
+    };
+  }
+
   render() {
     return (
       <div className="App">
@@ -16,7 +28,7 @@ export default class App extends Component {
           <Row className="show-grid">
             <Col xs={12}>
               <ToDoAddItem></ToDoAddItem>
-              <ToDoList></ToDoList>
+              <ToDoList list={this.state.toDoItems}></ToDoList>
             </Col>
           </Row>
         </Grid>
