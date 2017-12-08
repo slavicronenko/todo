@@ -1,4 +1,4 @@
-@import '../Variables.scss';
+@import '../variables.scss';
 
 $checkbox-size: 20px;
 $checkbox-color: $color-complement-1;
@@ -9,7 +9,7 @@ $background-color: $white;
 $glyph: '\2714';
 
 
-.ToDoCheckbox {
+.to-do-checkbox {
   display: inline-block;
   margin: 3px 0.5ex;
   padding: 0;

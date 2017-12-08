@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ToDoCheckbox.css';
+import './checkbox.css';
 
 export default class ToDoCheckbox extends Component {
   onChange(value) {
@@ -13,7 +13,7 @@ export default class ToDoCheckbox extends Component {
     } = this.props;
 
     return (
-      <label className="ToDoCheckbox">
+      <label className="to-do-checkbox">
         <input type="checkbox" checked={checked} disabled={disabled} onChange={this.onChange} />
         <small></small>
       </label>

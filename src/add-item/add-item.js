@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ToDoAddItem.css';
+import './add-item.css';
 import {
   InputGroup,
   FormControl,
@@ -9,11 +9,11 @@ import {
 export default class ToDoAddItem extends Component {
   render() {
     return (
-      <div className="ToDoAddItem">
+      <div className="to-do-add-item">
         <InputGroup>
-          <FormControl type="text" className="ToDoAddItem__text" />
+          <FormControl type="text" className="to-do-add-item__text" />
           <InputGroup.Button>
-            <Button className="ToDoAddItem__add">+</Button>
+            <Button className="to-do-add-item__add">+</Button>
           </InputGroup.Button>
         </InputGroup>
       </div>
