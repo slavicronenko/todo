@@ -8,11 +8,11 @@ export default class ToDoList extends Component {
   }
 
   render() {
-    const { list } = this.props;
+    const { todos } = this.props;
 
     return (
       <ul className="to-do-list">
-        {list.map((item) => <ToDoItem item={item} key={item.id}></ToDoItem>)}
+        {todos.map((item) => <ToDoItem item={item} key={item.id}></ToDoItem>)}
       </ul>
     );
   }

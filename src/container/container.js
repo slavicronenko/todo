@@ -1,13 +1,13 @@
 import { createStore } from 'redux';
 import { connect } from 'react-redux'
-import todoApp from '../reducer';
+import todoApp from '../app.reducer';
 import ToDoList from '../list'
 
 const store = createStore(todoApp);
 
 const mapStateToProps = state => {
   return {
-    todos: state.list
+    todos: state.todos
   }
 };
 
