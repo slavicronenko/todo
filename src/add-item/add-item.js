@@ -15,8 +15,9 @@ class ToDoAddItem extends Component {
     this.state = {text: ''};
     Object.assign(this, {
       dispatch,
-      onClick: this.onClick.bind(this),
-      handleChange: this.handleChange.bind(this)
+      handleClick: this.addItem.bind(this),
+      handleChange: this.handleChange.bind(this),
+      handleKeyPress: this.handleKeyPress.bind(this)
     })
   }
 
@@ -24,7 +25,13 @@ class ToDoAddItem extends Component {
     this.setState({text: event.target.value})
   }
 
-  onClick() {
+  handleKeyPress(event) {
+    if(event.key === 'Enter' && this.state.text.length){
+      this.addItem();
+    }
+  }
+
+  addItem() {
     this.dispatch(addTodo(this.state.text));
     this.setState({text: ''});
     this.input.focus();
@@ -34,11 +41,14 @@ class ToDoAddItem extends Component {
     return (
       <div className="to-do-add-item">
         <InputGroup>
-          <FormControl type="text" className="to-do-add-item__text" value={this.state.text}
+          <FormControl type="text" className="to-do-add-item__text"
+                       maxLength={255}
+                       value={this.state.text}
                        inputRef={input => this.input = input}
-                       onChange={this.handleChange}/>
+                       onChange={this.handleChange}
+                       onKeyPress={this.handleKeyPress}/>
           <InputGroup.Button>
-            <Button className="to-do-add-item__add" onClick={this.onClick}
+            <Button className="to-do-add-item__add" onClick={this.handleClick}
                     disabled={!this.state.text}>+</Button>
           </InputGroup.Button>
         </InputGroup>
