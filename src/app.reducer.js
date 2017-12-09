@@ -23,7 +23,6 @@ function getNewTodoItem(text, items) {
   return {
     id: getNextIndex(items),
     text,
-    completed: false,
-    disabled: false
+    completed: false
   };
 }

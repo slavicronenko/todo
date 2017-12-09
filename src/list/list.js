@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './list.css';
-import ToDoItem from '../todo-item';
+import ToDoItem from '../item';
 import { getClasses } from '../utility';
 
 export default class ToDoList extends Component {

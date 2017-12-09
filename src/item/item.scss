@@ -1,0 +1,31 @@
+@import '../Variables.scss';
+
+.to-do-item {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 3px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  background-color: $color-complement-0;
+
+  &__done,
+  &__text {
+    float: left;
+  }
+
+  &__done {
+    margin-right: 5px;
+  }
+
+  &__text {
+    display: inline-block;
+    max-width: 85%;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
