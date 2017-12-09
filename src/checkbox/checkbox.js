@@ -2,19 +2,39 @@ import React, { Component } from 'react';
 import './checkbox.css';
 
 export default class ToDoCheckbox extends Component {
-  onChange(value) {
-    console.log(value);
+  constructor() {
+    super();
+
+    const {
+      checked = false,
+      disabled = false
+    } = this.props || {};
+
+    Object.assign(this, {
+      state: {
+        checked,
+        disabled
+      },
+      handleChange: this.handleChange.bind(this)
+    });
+  }
+
+  handleChange(event) {
+    this.setState({
+      checked: event.target.checked
+    });
+    if (this.props.onChange) {
+      this.props.onChange(event.target.checked);
+    }
   }
 
   render() {
-    const {
-      disabled,
-      checked
-    } = this.props;
-
     return (
       <label className="to-do-checkbox">
-        <input type="checkbox" checked={checked} disabled={disabled} onChange={this.onChange} />
+        <input type="checkbox"
+               checked={this.state.checked}
+               disabled={this.state.disabled}
+               onChange={this.handleChange} />
         <small></small>
       </label>
     );
