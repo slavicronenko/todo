@@ -1,3 +1,4 @@
+import { getNextIndex } from './utility';
 import { ADD_TODO } from './app.actions';
 
 const initialState = {
@@ -10,7 +11,7 @@ export default function todoApp(state = initialState, action) {
       return Object.assign({}, state, {
         todos: [
           ...state.todos,
-          getNewTodoItem(action.text)
+          getNewTodoItem(action.text, state.todos)
         ]
       });
     default:
@@ -18,9 +19,10 @@ export default function todoApp(state = initialState, action) {
   }
 }
 
-function getNewTodoItem(text) {
+function getNewTodoItem(text, items) {
   return {
-    text: text,
+    id: getNextIndex(items),
+    text,
     completed: false,
     disabled: false
   };
