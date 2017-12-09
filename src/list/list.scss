@@ -9,5 +9,16 @@
   &.no-items {
     padding-top: 0;
     border-bottom: none;
+
+    &:before {
+      content: 'No items to show. Go ahead and add some :)';
+      display: block;
+      padding-top: 40px;
+      font-size: 2.5em;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: -1px;
+      color: $color-secondary-2-0;
+    }
   }
 }
