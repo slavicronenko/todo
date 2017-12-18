@@ -1,7 +1,12 @@
 import { getNextIndex } from './utility';
-import { ADD_TODO } from './app.actions';
+import {
+  ADD_TODO,
+  UPDATE_NEW_ITEM_TEXT,
+  TOGGLE_TODO
+} from './app.actions';
 
 const initialState = {
+  newItemText: '',
   todos: []
 };
 
@@ -14,6 +19,12 @@ export default function todoApp(state = initialState, action) {
           getNewTodoItem(action.text, state.todos)
         ]
       });
+    case UPDATE_NEW_ITEM_TEXT:
+      return Object.assign({}, state, { newItemText: action.text });
+    case TOGGLE_TODO:
+      const todos = state.todos.map((todo) => todo.id === action.id ? {...todo, completed: !todo.completed} : todo);
+
+      return Object.assign({}, state, { todos });
     default:
       return state
   }
