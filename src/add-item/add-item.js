@@ -6,50 +6,46 @@ import {
   FormControl,
   Button
 } from 'react-bootstrap';
-import { addTodo } from '../app.actions';
+import {
+  addTodo,
+  updateNewItemText
+} from '../app.actions';
 
 class ToDoAddItem extends Component {
-  constructor({dispatch}) {
-    super();
-
-    this.state = {text: ''};
-    Object.assign(this, {
-      dispatch,
-      handleClick: this.addItem.bind(this),
-      handleChange: this.handleChange.bind(this),
-      handleKeyPress: this.handleKeyPress.bind(this)
-    })
+  onChange(event) {
+    this.props.dispatch(updateNewItemText(event.target.value))
   }
 
-  handleChange(event) {
-    this.setState({text: event.target.value})
-  }
-
-  handleKeyPress(event) {
-    if(event.key === 'Enter' && this.state.text.length){
+  onKeyPress(event) {
+    if(event.key === 'Enter' && event.target.value){
       this.addItem();
     }
   }
 
   addItem() {
-    this.dispatch(addTodo(this.state.text));
-    this.setState({text: ''});
+    const { dispatch, newItemText } = this.props;
+
+    dispatch(addTodo(newItemText));
+    dispatch(updateNewItemText(''));
     this.input.focus();
   }
 
   render() {
+    const { newItemText } = this.props;
+
     return (
       <div className="to-do-add-item">
         <InputGroup>
           <FormControl type="text" className="to-do-add-item__text"
                        maxLength={255}
-                       value={this.state.text}
+                       value={newItemText}
                        inputRef={input => this.input = input}
-                       onChange={this.handleChange}
-                       onKeyPress={this.handleKeyPress}/>
+                       onChange={this.onChange.bind(this)}
+                       onKeyPress={this.onKeyPress.bind(this)}/>
           <InputGroup.Button>
-            <Button className="to-do-add-item__add" onClick={this.handleClick}
-                    disabled={!this.state.text}>+</Button>
+            <Button className="to-do-add-item__add"
+                    disabled={!newItemText}
+                    onClick={this.addItem.bind(this)}>+</Button>
           </InputGroup.Button>
         </InputGroup>
       </div>
@@ -57,4 +53,12 @@ class ToDoAddItem extends Component {
   }
 }
 
-export default connect()(ToDoAddItem);
+const mapStateToProps = (state) => {
+  return {
+    newItemText: state.newItemText
+  }
+};
+
+export default connect(
+  mapStateToProps
+)(ToDoAddItem);

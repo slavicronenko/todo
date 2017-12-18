@@ -15,8 +15,8 @@ export default class ToDoApp extends Component {
         <Grid>
           <Row className="show-grid">
             <Col xs={12}>
-              <ToDoAddItem></ToDoAddItem>
-              <ToDoContainer></ToDoContainer>
+              <ToDoAddItem />
+              <ToDoContainer />
             </Col>
           </Row>
         </Grid>
