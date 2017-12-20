@@ -9,9 +9,11 @@
   border-radius: 3px;
   background-color: $color-complement-0;
 
-  &__done,
-  &__text {
-    float: left;
+  &.completed {
+    .to-do-item__text {
+      text-decoration: line-through;
+      color: $color-secondary-2-3;
+    }
   }
 
   &__done {
@@ -19,8 +21,6 @@
   }
 
   &__text {
-    display: inline-block;
-    max-width: 85%;
     font-size: 12px;
     font-weight: bold;
     text-transform: capitalize;
@@ -29,8 +29,17 @@
     text-overflow: ellipsis;
   }
 
-  &.completed {
-    text-decoration: line-through;
-    color: $color-secondary-2-3;
+  &__delete {
+    margin-left: auto;
+
+    &:before {
+      content: '\00d7';
+      padding: 0 5px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 24px;
+      cursor: pointer;
+    }
   }
 }

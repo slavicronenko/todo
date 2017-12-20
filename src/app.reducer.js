@@ -2,7 +2,8 @@ import { getNextIndex } from './utility';
 import {
   ADD_TODO,
   UPDATE_NEW_ITEM_TEXT,
-  TOGGLE_TODO
+  TOGGLE_TODO,
+  DELETE_TODO
 } from './app.actions';
 
 const initialState = {
@@ -25,6 +26,8 @@ export default function todoApp(state = initialState, action) {
       const todos = state.todos.map((todo) => todo.id === action.id ? {...todo, completed: !todo.completed} : todo);
 
       return Object.assign({}, state, { todos });
+    case DELETE_TODO:
+      return Object.assign({}, state, { todos: state.todos.filter((todo) => todo.id !== action.id) });
     default:
       return state
   }

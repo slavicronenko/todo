@@ -5,10 +5,7 @@ import { getClasses } from '../utility';
 
 export default class ToDoList extends Component {
   render() {
-    const {
-      todos,
-      onToggleTodo
-    } = this.props;
+    const { todos } = this.props;
     const listClasses = getClasses({
       'to-do-list': true,
       'no-items': !todos.length
@@ -16,8 +13,17 @@ export default class ToDoList extends Component {
 
     return (
       <ul className={listClasses}>
-        {todos.map((item) => <ToDoItem item={item} key={item.id} onToggleTodo={onToggleTodo} />)}
+        {todos.map((item) => this.createTodoElement(item))}
       </ul>
     );
+  }
+
+  createTodoElement(item) {
+    const {
+      onToggleTodo,
+      onDeleteTodo
+    } = this.props;
+
+    return <ToDoItem item={item} key={item.id} onToggleTodo={onToggleTodo} onDeleteTodo={onDeleteTodo} />;
   }
 }

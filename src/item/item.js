@@ -7,7 +7,8 @@ export default class ToDoItem extends Component {
   render() {
     const {
       item,
-      onToggleTodo
+      onToggleTodo,
+      onDeleteTodo
     } = this.props;
 
     const itemClasses = getClasses({
@@ -21,6 +22,7 @@ export default class ToDoItem extends Component {
           <ToDoCheckbox checked={item.completed} onChange={() => onToggleTodo(item.id)} />
         </div>
         <div className="to-do-item__text">{item.text}</div>
+        <div className="to-do-item__delete" onClick={() => onDeleteTodo(item.id)}></div>
       </li>
     );
   }
