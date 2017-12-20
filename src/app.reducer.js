@@ -15,8 +15,8 @@ export default function todoApp(state = initialState, action) {
     case ADD_TODO:
       return Object.assign({}, state, {
         todos: [
-          ...state.todos,
-          getNewTodoItem(action.text, state.todos)
+          getNewTodoItem(action.text, state.todos),
+          ...state.todos
         ]
       });
     case UPDATE_NEW_ITEM_TEXT:
