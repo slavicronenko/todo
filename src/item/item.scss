@@ -28,4 +28,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  &.completed {
+    text-decoration: line-through;
+    color: $color-secondary-2-3;
+  }
 }
