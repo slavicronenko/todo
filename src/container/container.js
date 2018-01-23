@@ -4,13 +4,17 @@ import todoApp from '../app.reducer';
 import ToDoList from '../list'
 import {
   toggleTodo,
-  deleteTodo
+  deleteTodo,
+  enableEditMode,
+  updateEditedItemText,
+  updateTodoText
 } from '../app.actions';
 
 const store = createStore(todoApp);
 
 const mapStateToProps = (state) => {
   return {
+    editedItem: state.editedItem,
     todos: state.todos
   }
 };
@@ -18,7 +22,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onToggleTodo: (id) => dispatch(toggleTodo(id)),
-    onDeleteTodo: (id) => dispatch(deleteTodo(id))
+    onDeleteTodo: (id) => dispatch(deleteTodo(id)),
+    onDoubleClickTodo: (item) => dispatch(enableEditMode(item)),
+    onEditInputChange: (text) => dispatch(updateEditedItemText(text)),
+    onBlurTodo: () => dispatch(updateTodoText())
   };
 };
 

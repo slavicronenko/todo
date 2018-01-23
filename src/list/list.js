@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './list.css';
 import ToDoItem from '../item';
-import { getClasses } from '../utility';
+import { getClasses } from '../helper';
 
 export default class ToDoList extends Component {
   render() {
@@ -20,10 +20,23 @@ export default class ToDoList extends Component {
 
   createTodoElement(item) {
     const {
+      editedItem,
       onToggleTodo,
-      onDeleteTodo
+      onDeleteTodo,
+      onDoubleClickTodo,
+      onEditInputChange,
+      onBlurTodo
     } = this.props;
 
-    return <ToDoItem item={item} key={item.id} onToggleTodo={onToggleTodo} onDeleteTodo={onDeleteTodo} />;
+    return <ToDoItem
+      item={item}
+      key={item.id}
+      isEdited={item.id === editedItem.id}
+      editInputValue={editedItem.text}
+      onToggleTodo={onToggleTodo}
+      onDeleteTodo={onDeleteTodo}
+      onDoubleClickTodo={onDoubleClickTodo}
+      onEditInputChange={onEditInputChange}
+      onBlurTodo={onBlurTodo} />;
   }
 }

@@ -5,3 +5,7 @@ export function getClasses(classes) {
 export function getNextIndex(list, indexProp = 'id') {
   return list.reduce((currentIndex, item) => item[indexProp] >= currentIndex ? item[indexProp] : currentIndex, 0) + 1;
 }
+
+export function trimSpaces(str) {
+  return str.replace(/^\s*|\s*$/g, '');
+}
