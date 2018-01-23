@@ -1,19 +1,50 @@
 import React, { Component } from 'react';
 import './item.css';
 import ToDoCheckbox from '../checkbox';
-import { getClasses } from "../helper";
 import { FormControl } from 'react-bootstrap';
+import {
+  getClasses,
+  ENTER_KEY,
+  ESCAPE_KEY
+} from '../helper';
 
 export default class ToDoItem extends Component {
   componentDidUpdate(prevProps){
-    if (!prevProps.isEdited && this.props.isEdited) {
+    const { isEdited: isCurrentlyEditing} = this.props;
+    const { isEdited: edited } = prevProps;
+
+    if (!edited && isCurrentlyEditing) {
+      const inputValueLength = this.input.value.length;
+
       this.input.focus();
-      this.input.setSelectionRange(this.input.value.length, this.input.value.length);
+      this.input.setSelectionRange(inputValueLength, inputValueLength);
     }
   }
 
-  onKeyPress(event) {
-    console.log(event);
+  onKeyDown(event) {
+    const {
+      updateTodoText,
+      cancelEditing
+    } = this.props;
+
+    if (event.which === ENTER_KEY) {
+      updateTodoText();
+    } else if (event.which === ESCAPE_KEY) {
+      cancelEditing();
+    }
+  }
+
+  onBlur(event) {
+    const {
+      updateTodoText,
+      cancelEditing
+    } = this.props;
+
+    if (event.target.value) {
+      updateTodoText();
+    } else {
+      cancelEditing();
+    }
   }
 
   render() {
@@ -21,11 +52,10 @@ export default class ToDoItem extends Component {
       item,
       isEdited,
       editInputValue,
-      onEditInputChange,
-      onToggleTodo,
-      onDeleteTodo,
-      onDoubleClickTodo,
-      onBlurTodo
+      updateEditedItemText,
+      toggleTodo,
+      deleteTodo,
+      enableEditMode
     } = this.props;
 
     const itemClasses = getClasses({
@@ -38,18 +68,18 @@ export default class ToDoItem extends Component {
                      maxLength={255}
                      value={editInputValue}
                      inputRef={input => this.input = input }
-                     onBlur={() => onBlurTodo()}
-                     onKeyPress={this.onKeyPress.bind(this)}
-                     onChange={(event) => onEditInputChange(event.target.value)}/>
-      : <span className="to-do-item__text" onDoubleClick={() => onDoubleClickTodo(item)}>{item.text}</span>;
+                     onBlur={this.onBlur.bind(this)}
+                     onKeyDown={this.onKeyDown.bind(this)}
+                     onChange={(event) => updateEditedItemText(event.target.value)}/>
+      : <span className="to-do-item__text" onDoubleClick={() => enableEditMode(item)}>{item.text}</span>;
 
     return (
       <li className={itemClasses}>
         <div className="to-do-item__done">
-          <ToDoCheckbox checked={item.completed} onChange={() => onToggleTodo(item.id)} />
+          <ToDoCheckbox checked={item.completed} onChange={() => toggleTodo(item.id)} />
         </div>
         <div className="to-do-item__content">{content}</div>
-        <div className="to-do-item__delete" onClick={() => onDeleteTodo(item.id)}></div>
+        <div className="to-do-item__delete" onClick={() => deleteTodo(item.id)}></div>
       </li>
     );
   }

@@ -7,7 +7,8 @@ import {
   deleteTodo,
   enableEditMode,
   updateEditedItemText,
-  updateTodoText
+  updateTodoText,
+  cancelEditing
 } from '../app.actions';
 
 const store = createStore(todoApp);
@@ -21,11 +22,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onToggleTodo: (id) => dispatch(toggleTodo(id)),
-    onDeleteTodo: (id) => dispatch(deleteTodo(id)),
-    onDoubleClickTodo: (item) => dispatch(enableEditMode(item)),
-    onEditInputChange: (text) => dispatch(updateEditedItemText(text)),
-    onBlurTodo: () => dispatch(updateTodoText())
+    toggleTodo: (id) => dispatch(toggleTodo(id)),
+    deleteTodo: (id) => dispatch(deleteTodo(id)),
+    enableEditMode: (item) => dispatch(enableEditMode(item)),
+    updateEditedItemText: (text) => dispatch(updateEditedItemText(text)),
+    updateTodoText: () => dispatch(updateTodoText()),
+    cancelEditing: () => dispatch(cancelEditing())
   };
 };
 

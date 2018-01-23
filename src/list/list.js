@@ -21,11 +21,12 @@ export default class ToDoList extends Component {
   createTodoElement(item) {
     const {
       editedItem,
-      onToggleTodo,
-      onDeleteTodo,
-      onDoubleClickTodo,
-      onEditInputChange,
-      onBlurTodo
+      toggleTodo,
+      deleteTodo,
+      enableEditMode,
+      updateEditedItemText,
+      updateTodoText,
+      cancelEditing
     } = this.props;
 
     return <ToDoItem
@@ -33,10 +34,11 @@ export default class ToDoList extends Component {
       key={item.id}
       isEdited={item.id === editedItem.id}
       editInputValue={editedItem.text}
-      onToggleTodo={onToggleTodo}
-      onDeleteTodo={onDeleteTodo}
-      onDoubleClickTodo={onDoubleClickTodo}
-      onEditInputChange={onEditInputChange}
-      onBlurTodo={onBlurTodo} />;
+      toggleTodo={toggleTodo}
+      deleteTodo={deleteTodo}
+      enableEditMode={enableEditMode}
+      updateEditedItemText={updateEditedItemText}
+      updateTodoText={updateTodoText}
+      cancelEditing={cancelEditing} />;
   }
 }

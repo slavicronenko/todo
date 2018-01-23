@@ -9,7 +9,8 @@ import {
   DELETE_TODO,
   ENABLE_EDIT_MODE,
   UPDATE_EDITED_ITEM_TEXT,
-  UPDATE_TODO_TEXT
+  UPDATE_TODO_TEXT,
+  CANCEL_EDITING
 } from './app.actions';
 
 const initialState = {
@@ -69,6 +70,10 @@ export default function todoApp(state = initialState, action) {
         editedItem: initialState.editedItem,
         todos
       });
+    }
+
+    case CANCEL_EDITING: {
+      return Object.assign({}, state, { editedItem: initialState.editedItem });
     }
 
     default:

@@ -9,3 +9,6 @@ export function getNextIndex(list, indexProp = 'id') {
 export function trimSpaces(str) {
   return str.replace(/^\s*|\s*$/g, '');
 }
+
+export const ESCAPE_KEY = 27;
+export const ENTER_KEY = 13;

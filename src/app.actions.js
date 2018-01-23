@@ -5,6 +5,7 @@ export const DELETE_TODO = 'DELETE_TODO';
 export const ENABLE_EDIT_MODE = 'ENABLE_EDIT_MODE';
 export const UPDATE_EDITED_ITEM_TEXT = 'UPDATE_EDITED_ITEM_TEXT';
 export const UPDATE_TODO_TEXT = 'UPDATE_TODO_TEXT';
+export const CANCEL_EDITING = 'CANCEL_EDITING';
 
 export function addTodo(text) {
   return {
@@ -51,5 +52,11 @@ export function updateEditedItemText(text) {
 export function updateTodoText() {
   return {
     type: UPDATE_TODO_TEXT
+  }
+}
+
+export function cancelEditing() {
+  return {
+    type: CANCEL_EDITING
   }
 }
