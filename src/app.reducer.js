@@ -1,7 +1,4 @@
-import {
-  getNextIndex,
-  trimSpaces
-} from './helper';
+import { getNextIndex } from './helper';
 import {
   ADD_TODO,
   UPDATE_NEW_ITEM_TEXT,
@@ -27,7 +24,7 @@ export default function todoApp(state = initialState, action) {
     case ADD_TODO:
       return Object.assign({}, state, {
         todos: [
-          getNewTodoItem(trimSpaces(action.text), state.todos),
+          getNewTodoItem(action.text.trim(), state.todos),
           ...state.todos
         ]
       });
@@ -63,7 +60,7 @@ export default function todoApp(state = initialState, action) {
       const todos = [...state.todos];
 
       if (editedItem.text) {
-        todos.find((todo) => todo.id === editedItem.id).text = trimSpaces(editedItem.text);
+        todos.find((todo) => todo.id === editedItem.id).text = editedItem.text.trim();
       }
 
       return Object.assign({}, state, {
