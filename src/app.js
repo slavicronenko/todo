@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './app.css';
+import ToDoHeader from './header';
 import ToDoContainer from './container';
 import ToDoAddItem from './add-item';
 import {
@@ -12,8 +13,9 @@ export default class ToDoApp extends Component {
   render() {
     return (
       <div className="to-do-app">
+        <ToDoHeader />
         <Grid>
-          <Row className="show-grid">
+          <Row>
             <Col xs={12}>
               <ToDoAddItem />
               <ToDoContainer />
