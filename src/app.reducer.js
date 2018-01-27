@@ -16,18 +16,27 @@ const initialState = {
     id: null,
     text: ''
   },
-  todos: []
+  todos: [],
+  settings: {
+    delimiter: ';'
+  }
 };
 
 export default function todoApp(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
-      return Object.assign({}, state, {
-        todos: [
-          getNewTodoItem(action.text.trim(), state.todos),
-          ...state.todos
-        ]
+      const todos = [...state.todos];
+      const { delimiter } = state.settings;
+
+      action.text.split(delimiter).forEach((text) => {
+        const trimmedText = text.trim();
+
+        if (trimmedText) {
+          todos.unshift(getNewTodoItem(trimmedText, todos));
+        }
       });
+
+      return Object.assign({}, state, { todos });
 
     case UPDATE_NEW_ITEM_TEXT:
       return Object.assign({}, state, { newItemText: action.text });
