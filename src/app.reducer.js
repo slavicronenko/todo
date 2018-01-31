@@ -7,7 +7,8 @@ import {
   ENABLE_EDIT_MODE,
   UPDATE_EDITED_ITEM_TEXT,
   UPDATE_TODO_TEXT,
-  CANCEL_EDITING
+  CANCEL_EDITING,
+  UPDATE_FILTER
 } from './app.actions';
 
 const initialState = {
@@ -17,12 +18,13 @@ const initialState = {
     text: ''
   },
   todos: [],
+  filter: '',
   settings: {
     delimiter: ';'
   }
 };
 
-export default function todoApp(state = initialState, action) {
+export function todoApp(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
       const todos = [...state.todos];
@@ -42,7 +44,7 @@ export default function todoApp(state = initialState, action) {
       return Object.assign({}, state, { newItemText: action.text });
 
     case TOGGLE_TODO: {
-      const todos = state.todos.map((todo) => todo.id === action.id ? {...todo, completed: !todo.completed} : todo);
+      const todos = state.todos.map((todo) => todo.id === action.id ? toggleTodoStatus(todo) : todo);
 
       return Object.assign({}, state, { todos });
     }
@@ -82,15 +84,43 @@ export default function todoApp(state = initialState, action) {
       return Object.assign({}, state, { editedItem: initialState.editedItem });
     }
 
+    case UPDATE_FILTER: {
+      return Object.assign({}, state, { filter: action.value });
+    }
+
     default:
       return state
   }
+}
+
+export function getFilteredTodos(state) {
+  const {
+    todos,
+    filter
+  } = state;
+
+  return filter
+    ? todos.filter((todo) => todo.status === filter)
+    : todos;
 }
 
 function getNewTodoItem(text, items) {
   return {
     id: getNextIndex(items),
     text,
-    completed: false
+    status: TODO_STATUS.ACTIVE
   };
 }
+
+function toggleTodoStatus(todo) {
+  return Object.assign({}, todo, {
+    status: todo.status === TODO_STATUS.ACTIVE
+      ? TODO_STATUS.COMPLETED
+      : TODO_STATUS.ACTIVE
+  });
+}
+
+export const TODO_STATUS = {
+  ACTIVE: 'active',
+  COMPLETED: 'completed'
+};

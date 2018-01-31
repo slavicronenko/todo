@@ -7,6 +7,7 @@ import {
   ENTER_KEY,
   ESCAPE_KEY
 } from '../helper';
+import { TODO_STATUS } from '../app.reducer';
 
 export default class ToDoItem extends Component {
   componentDidUpdate(prevProps){
@@ -60,7 +61,7 @@ export default class ToDoItem extends Component {
 
     const itemClasses = getClasses({
       'to-do-item': true,
-      'completed': item.completed
+      [item.status]: true
     });
 
     const content = isEdited
@@ -76,11 +77,15 @@ export default class ToDoItem extends Component {
     return (
       <li className={itemClasses}>
         <div className="to-do-item__done">
-          <ToDoCheckbox checked={item.completed} onChange={() => toggleTodo(item.id)} />
+          <ToDoCheckbox checked={this.isTodoCompleted(item)} onChange={() => toggleTodo(item.id)} />
         </div>
         <div className="to-do-item__content">{content}</div>
         <div className="to-do-item__delete" onClick={() => deleteTodo(item.id)}></div>
       </li>
     );
+  }
+
+  isTodoCompleted(todo) {
+    return todo.status === TODO_STATUS.COMPLETED;
   }
 }

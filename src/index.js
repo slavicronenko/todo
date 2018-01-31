@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux'
 import registerServiceWorker from './registerServiceWorker';
 import ToDoApp from './app';
-import todoApp from './app.reducer';
+import { todoApp } from './app.reducer';
 
 let store = createStore(todoApp);
 

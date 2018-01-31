@@ -1,6 +1,9 @@
 import { createStore } from 'redux';
 import { connect } from 'react-redux'
-import todoApp from '../app.reducer';
+import {
+  todoApp,
+  getFilteredTodos
+} from '../app.reducer';
 import ToDoList from '../list'
 import {
   toggleTodo,
@@ -16,7 +19,8 @@ const store = createStore(todoApp);
 const mapStateToProps = (state) => {
   return {
     editedItem: state.editedItem,
-    todos: state.todos
+    todos: getFilteredTodos(state),
+    isNoItems: !state.todos.length
   }
 };
 

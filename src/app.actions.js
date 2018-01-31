@@ -6,6 +6,7 @@ export const ENABLE_EDIT_MODE = 'ENABLE_EDIT_MODE';
 export const UPDATE_EDITED_ITEM_TEXT = 'UPDATE_EDITED_ITEM_TEXT';
 export const UPDATE_TODO_TEXT = 'UPDATE_TODO_TEXT';
 export const CANCEL_EDITING = 'CANCEL_EDITING';
+export const UPDATE_FILTER = 'UPDATE_FILTER';
 
 export function addTodo(text) {
   return {
@@ -58,5 +59,19 @@ export function updateTodoText() {
 export function cancelEditing() {
   return {
     type: CANCEL_EDITING
+  }
+}
+
+export function showAllTodos() {
+  return {
+    type: UPDATE_FILTER,
+    value: ''
+  }
+}
+
+export function updateFilter(value) {
+  return {
+    type: UPDATE_FILTER,
+    value
   }
 }

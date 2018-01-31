@@ -5,10 +5,10 @@ import { getClasses } from '../helper';
 
 export default class ToDoList extends Component {
   render() {
-    const { todos } = this.props;
+    const { todos, isNoItems } = this.props;
     const listClasses = getClasses({
       'to-do-list': true,
-      'no-items': !todos.length
+      'no-items': isNoItems
     });
 
     return (
