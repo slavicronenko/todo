@@ -8,7 +8,7 @@ import {
   UPDATE_EDITED_ITEM_TEXT,
   UPDATE_TODO_TEXT,
   CANCEL_EDITING,
-  UPDATE_FILTER
+  UPDATE_FILTER, SET_TODOS
 } from './app.actions';
 
 const initialState = {
@@ -86,6 +86,10 @@ export function todoApp(state = initialState, action) {
 
     case UPDATE_FILTER: {
       return Object.assign({}, state, { filter: action.value });
+    }
+
+    case SET_TODOS: {
+      return Object.assign({}, state, { todos: action.todos });
     }
 
     default:
