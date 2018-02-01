@@ -12,6 +12,10 @@ import {
 } from '../app.actions';
 
 class ToDoAddItem extends Component {
+  componentDidMount(){
+    this.input.focus();
+  }
+
   onChange(event) {
     this.props.dispatch(updateNewItemText(event.target.value))
   }
