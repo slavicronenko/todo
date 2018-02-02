@@ -30,6 +30,6 @@ store.subscribe(() => {
 
 window.addEventListener('DOMContentLoaded', () => {
   if (window.chrome.storage) {
-    window.chrome.storage.sync.get('todos', ({ todos }) => store.dispatch(setTodos(todos)));
+    window.chrome.storage.sync.get('todos', ({ todos }) => todos && store.dispatch(setTodos(todos)));
   }
 });
