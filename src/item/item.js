@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './item.css';
+import { Draggable } from 'react-beautiful-dnd';
 import ToDoCheckbox from '../checkbox';
 import { FormControl } from 'react-bootstrap';
 import {
@@ -10,9 +11,9 @@ import {
 import { TODO_STATUS } from '../app.reducer';
 
 export default class ToDoItem extends Component {
-  componentDidUpdate(prevProps){
-    const { isEdited: isCurrentlyEditing} = this.props;
-    const { isEdited: edited } = prevProps;
+  componentDidUpdate(prevProps) {
+    const {isEdited: isCurrentlyEditing} = this.props;
+    const {isEdited: edited} = prevProps;
 
     if (!edited && isCurrentlyEditing) {
       const inputValueLength = this.input.value.length;
@@ -51,6 +52,7 @@ export default class ToDoItem extends Component {
   render() {
     const {
       item,
+      index,
       isEdited,
       editInputValue,
       updateEditedItemText,
@@ -68,20 +70,30 @@ export default class ToDoItem extends Component {
       ? <FormControl type="text" className="to-do-item__input"
                      maxLength={255}
                      value={editInputValue}
-                     inputRef={input => this.input = input }
+                     inputRef={input => this.input = input}
                      onBlur={this.onBlur.bind(this)}
                      onKeyDown={this.onKeyDown.bind(this)}
                      onChange={(event) => updateEditedItemText(event.target.value)}/>
       : <span className="to-do-item__text" onDoubleClick={() => enableEditMode(item)}>{item.text}</span>;
 
     return (
-      <li className={itemClasses}>
-        <div className="to-do-item__done">
-          <ToDoCheckbox checked={this.isTodoCompleted(item)} onChange={() => toggleTodo(item.id)} />
-        </div>
-        <div className="to-do-item__content">{content}</div>
-        <div className="to-do-item__delete" onClick={() => deleteTodo(item.id)}></div>
-      </li>
+      <Draggable draggableId={item.id} index={index}>
+        {(provided) => (
+          <div>
+            <div className={itemClasses}
+                 ref={provided.innerRef}
+                 {...provided.draggableProps}
+                 {...provided.dragHandleProps}>
+              <div className="to-do-item__done">
+                <ToDoCheckbox checked={this.isTodoCompleted(item)} onChange={() => toggleTodo(item.id)}/>
+              </div>
+              <div className="to-do-item__content">{content}</div>
+              <div className="to-do-item__delete" onClick={() => deleteTodo(item.id)}></div>
+            </div>
+            {provided.placeholder}
+          </div>
+        )}
+      </Draggable>
     );
   }
 

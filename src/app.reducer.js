@@ -8,8 +8,13 @@ import {
   UPDATE_EDITED_ITEM_TEXT,
   UPDATE_TODO_TEXT,
   CANCEL_EDITING,
-  UPDATE_FILTER, SET_TODOS
+  UPDATE_FILTER, SET_TODOS, REORDER
 } from './app.actions';
+
+export const TODO_STATUS = {
+  ACTIVE: 'active',
+  COMPLETED: 'completed'
+};
 
 const initialState = {
   newItemText: '',
@@ -92,6 +97,19 @@ export function todoApp(state = initialState, action) {
       return Object.assign({}, state, { todos: action.todos });
     }
 
+    case REORDER: {
+      const filteredTodos = getFilteredTodos(state);
+      const { id: destinationId } = filteredTodos.find((todo, index) => index === action.destination);
+      const trueSource = state.todos.findIndex((todo) => todo.id === action.id);
+      const trueDestination = state.todos.findIndex((todo) => todo.id === destinationId);
+      const result = Array.from(state.todos);
+      const [movedTodo] = result.splice(trueSource, 1);
+
+      result.splice(trueDestination, 0, movedTodo);
+
+      return Object.assign({}, state, { todos: result });
+    }
+
     default:
       return state
   }
@@ -123,8 +141,3 @@ function toggleTodoStatus(todo) {
       : TODO_STATUS.ACTIVE
   });
 }
-
-export const TODO_STATUS = {
-  ACTIVE: 'active',
-  COMPLETED: 'completed'
-};

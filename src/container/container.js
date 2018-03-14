@@ -11,7 +11,8 @@ import {
   enableEditMode,
   updateEditedItemText,
   updateTodoText,
-  cancelEditing
+  cancelEditing,
+  reorder
 } from '../app.actions';
 
 const store = createStore(todoApp);
@@ -31,7 +32,8 @@ const mapDispatchToProps = (dispatch) => {
     enableEditMode: (item) => dispatch(enableEditMode(item)),
     updateEditedItemText: (text) => dispatch(updateEditedItemText(text)),
     updateTodoText: () => dispatch(updateTodoText()),
-    cancelEditing: () => dispatch(cancelEditing())
+    cancelEditing: () => dispatch(cancelEditing()),
+    reorder: (id, destination) => dispatch(reorder(id, destination))
   };
 };
 

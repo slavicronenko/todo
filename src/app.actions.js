@@ -8,6 +8,7 @@ export const UPDATE_TODO_TEXT = 'UPDATE_TODO_TEXT';
 export const CANCEL_EDITING = 'CANCEL_EDITING';
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 export const SET_TODOS = 'SET_TODOS';
+export const REORDER = 'REORDER';
 
 export function addTodo(text) {
   return {
@@ -81,5 +82,13 @@ export function setTodos(todos) {
   return {
     type: SET_TODOS,
     todos
+  }
+}
+
+export function reorder(id, destination) {
+  return {
+    type: REORDER,
+    id,
+    destination
   }
 }
