@@ -9,6 +9,7 @@ export const CANCEL_EDITING = 'CANCEL_EDITING';
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 export const SET_TODOS = 'SET_TODOS';
 export const REORDER = 'REORDER';
+export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
 
 export function addTodo(text) {
   return {
@@ -90,5 +91,11 @@ export function reorder(id, destination) {
     type: REORDER,
     id,
     destination
+  }
+}
+
+export function clearCompleted() {
+  return {
+    type: CLEAR_COMPLETED
   }
 }

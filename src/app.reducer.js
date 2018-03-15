@@ -8,7 +8,10 @@ import {
   UPDATE_EDITED_ITEM_TEXT,
   UPDATE_TODO_TEXT,
   CANCEL_EDITING,
-  UPDATE_FILTER, SET_TODOS, REORDER
+  UPDATE_FILTER,
+  SET_TODOS,
+  REORDER,
+  CLEAR_COMPLETED
 } from './app.actions';
 
 export const TODO_STATUS = {
@@ -106,6 +109,12 @@ export function todoApp(state = initialState, action) {
       const [movedTodo] = result.splice(trueSource, 1);
 
       result.splice(trueDestination, 0, movedTodo);
+
+      return Object.assign({}, state, { todos: result });
+    }
+
+    case CLEAR_COMPLETED: {
+      const result = state.todos.filter((todo) => todo.status !== TODO_STATUS.COMPLETED);
 
       return Object.assign({}, state, { todos: result });
     }

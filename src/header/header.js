@@ -8,7 +8,8 @@ import {
 } from 'react-bootstrap';
 import {
   showAllTodos,
-  updateFilter
+  updateFilter,
+  clearCompleted
 } from '../app.actions';
 import {
   TODO_STATUS
@@ -19,20 +20,30 @@ class ToDoHeader extends Component {
   filters = {
     all: {
       title: 'All',
-      action: () => {this.props.dispatch(showAllTodos())}
+      action: () => {
+        this.props.dispatch(showAllTodos())
+      }
     },
     [TODO_STATUS.ACTIVE]: {
       title: TODO_STATUS.ACTIVE,
-      action: () => {this.props.dispatch(updateFilter(TODO_STATUS.ACTIVE))}
+      action: () => {
+        this.props.dispatch(updateFilter(TODO_STATUS.ACTIVE))
+      }
     },
     [TODO_STATUS.COMPLETED]: {
       title: TODO_STATUS.COMPLETED,
-      action: () => {this.props.dispatch(updateFilter(TODO_STATUS.COMPLETED))}
-    },
+      action: () => {
+        this.props.dispatch(updateFilter(TODO_STATUS.COMPLETED))
+      }
+    }
   };
 
+  clearCompleted() {
+    this.props.dispatch(clearCompleted())
+  }
+
   render() {
-    const { itemsLeft, filter } = this.props;
+    const {itemsLeft, filter} = this.props;
     const itemsLeftText = `${itemsLeft} item${itemsLeft !== 1 ? 's' : ''} left`;
 
     return (
@@ -41,9 +52,13 @@ class ToDoHeader extends Component {
           <Row>
             <Col xs={12}>
               <div className="to-do-header__content">
-                <div className="to-do-header__items-left" title={itemsLeftText}>{itemsLeft}</div>
+                <div className="to-do-header__left">
+                  <div className="to-do-header__items-left" title={itemsLeftText}>{itemsLeft}</div>
+                  <div className="to-do-header__clear-completed"
+                       title="Clear all completed items"
+                       onClick={this.clearCompleted.bind(this)}></div>
+                </div>
                 <div className="to-do-header__filters">
-                  <div className="to-do-header__filters-label">Show: </div>
                   {this.createFilterItems(filter)}
                 </div>
                 <div className="to-do-header__help">?</div>
@@ -63,7 +78,12 @@ class ToDoHeader extends Component {
         'active': currentFilter === filterName || (filterName === 'all' && currentFilter === '')
       });
 
-      return <div className={filterClasses} key={filterName} onClick={filterItem.action}>{filterItem.title}</div>;
+      return <div className={filterClasses}
+                  key={filterName}
+                  title={`Show ${filterName} items`}
+                  onClick={filterItem.action}>
+        {filterItem.title}
+      </div>;
     });
   }
 }
