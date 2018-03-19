@@ -14,6 +14,7 @@ import {
 import {
   TODO_STATUS
 } from '../app.reducer';
+import ToDoSearch from '../search';
 import { getClasses } from '../helper';
 
 class ToDoHeader extends Component {
@@ -61,7 +62,10 @@ class ToDoHeader extends Component {
                 <div className="to-do-header__filters">
                   {this.createFilterItems(filter)}
                 </div>
-                <div className="to-do-header__help">?</div>
+                <div className="to-do-header__right">
+                  <ToDoSearch></ToDoSearch>
+                  <div className="to-do-header__help">?</div>
+                </div>
               </div>
             </Col>
           </Row>

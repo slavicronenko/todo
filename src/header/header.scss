@@ -75,4 +75,18 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+
+  &__right {
+    display: flex;
+    width: 125px;
+    justify-content: flex-end;
+
+    & > * {
+      margin-right: 6px;
+    }
+
+    & > *:last-child {
+      margin-right: 0;
+    }
+  }
 }

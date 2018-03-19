@@ -5,18 +5,21 @@ import { FormControl } from 'react-bootstrap';
 
 class ToDoSearch extends Component {
   onChange(event) {
-    this.props.dispatch(updateSearchQuery(event.target.value));
+    //this.props.dispatch(updateSearchQuery(event.target.value));
   }
 
   render() {
-    const { searchQuery } = this.props;
+
+    const searchQuery = 'asdasdas';
 
     return (
-      <FormControl type="text" className="to-do-add-item__text"
-                   maxLength={255}
-                   value={searchQuery}
-                   inputRef={input => this.input = input}
-                   onChange={this.onChange.bind(this)}/>
+      <div className="to-do-search">
+        <FormControl type="text" className="to-do-search-input"
+                     maxLength={255}
+                     value={searchQuery}
+                     inputRef={input => this.input = input}
+                     onChange={this.onChange.bind(this)}/>
+      </div>
     );
   }
 }

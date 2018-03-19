@@ -29,7 +29,8 @@ const initialState = {
   filter: '',
   settings: {
     delimiter: ';'
-  }
+  },
+  searchQuery: ''
 };
 
 export function todoApp(state = initialState, action) {

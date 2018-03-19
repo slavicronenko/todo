@@ -1,38 +1,20 @@
 @import '../variables.scss';
 
-.to-do-add-item {
-  margin-bottom: 10px;
+.to-do-search {
+  &-input {
+    width: 18px;
+    height: 22px;
+    padding: 6px;
+    color: transparent;
+    transition: width .1s linear;
+    float: right;
 
-  &__add {
-    background-image: none;
-    font-weight: bold;
-    color: $gray-primary-2;
-    background-color: $color-complement-0;
-
-    &:active,
-    &:visited,
     &:hover,
-    &:active:focus,
-    &:active:hover {
-      background-color: $color-complement-1;
-      box-shadow: none;
-      outline: none;
-    }
-
-    &, &:focus {
-      background-color: $color-complement-0;
-    }
-
-    &:focus {
-      box-shadow: none;
-      outline: none;
-    }
-  }
-
-  &__text {
-    &:focus {
-      box-shadow: none;
-      border-color: $color-secondary-2-1;
+    &:focus,
+    &.visible {
+      width: 100%;
+      color: $text-color;
+      transition: width .1s linear;
     }
   }
 }
