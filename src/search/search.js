@@ -19,6 +19,7 @@ class ToDoSearch extends Component {
                      value={searchQuery}
                      inputRef={input => this.input = input}
                      onChange={this.onChange.bind(this)}/>
+        <div className="to-do-search-icon"></div>
       </div>
     );
   }
