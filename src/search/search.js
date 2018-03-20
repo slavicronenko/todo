@@ -10,6 +10,10 @@ class ToDoSearch extends Component {
     this.props.dispatch(updateSearchQuery(event.target.value));
   }
 
+  onClearClick(event) {
+    this.props.dispatch(updateSearchQuery(''));
+  }
+
   render() {
     const { searchQuery } = this.props;
 
@@ -26,6 +30,7 @@ class ToDoSearch extends Component {
                      inputRef={input => this.input = input}
                      onChange={this.onChange.bind(this)}/>
         <div className="to-do-search-icon"></div>
+        <div className="to-do-search-clear" onClick={this.onClearClick.bind(this)}></div>
       </div>
     );
   }

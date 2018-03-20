@@ -1,6 +1,9 @@
 @import '../variables.scss';
 
 .to-do-search {
+  display: flex;
+  flex-direction: row-reverse;
+
   &-input {
     width: 18px;
     height: 22px;
@@ -11,6 +14,7 @@
     &:hover,
     &:focus,
     &.visible {
+      padding-right: 14px;
       width: 100%;
       color: $text-color;
     }
@@ -31,5 +35,25 @@
   &-input:focus + &-icon,
   &-input.visible + &-icon {
     display: none;
+  }
+
+  &-clear {
+    display: none;
+    position: absolute;
+    color: $text-color;
+    padding: 1px 4px 0 2px;
+    cursor: pointer;
+
+    &:before {
+      content: '\D7';
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  &-input:not(:empty):hover + &-icon + &-clear,
+  &-input:not(:empty):focus + &-icon + &-clear,
+  &-input.visible + &-icon + &-clear {
+    display: block;
   }
 }
