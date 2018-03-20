@@ -10,6 +10,7 @@ export const UPDATE_FILTER = 'UPDATE_FILTER';
 export const SET_TODOS = 'SET_TODOS';
 export const REORDER = 'REORDER';
 export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
+export const UPDATE_SEARCH_QUERY = 'UPDATE_SEARCH_QUERY';
 
 export function addTodo(text) {
   return {
@@ -97,5 +98,12 @@ export function reorder(id, destination) {
 export function clearCompleted() {
   return {
     type: CLEAR_COMPLETED
+  }
+}
+
+export function updateSearchQuery(value) {
+  return {
+    type: UPDATE_SEARCH_QUERY,
+    value
   }
 }

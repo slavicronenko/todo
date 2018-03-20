@@ -28,7 +28,8 @@
 
   &-icon:hover,
   &-input:hover + &-icon,
-  &-input:focus + &-icon {
+  &-input:focus + &-icon,
+  &-input.visible + &-icon {
     display: none;
   }
 }

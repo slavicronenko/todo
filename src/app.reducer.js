@@ -1,4 +1,4 @@
-import { getNextIndex } from './helper';
+import { filterWithConditions, getNextIndex } from './helper';
 import {
   ADD_TODO,
   UPDATE_NEW_ITEM_TEXT,
@@ -11,7 +11,8 @@ import {
   UPDATE_FILTER,
   SET_TODOS,
   REORDER,
-  CLEAR_COMPLETED
+  CLEAR_COMPLETED,
+  UPDATE_SEARCH_QUERY
 } from './app.actions';
 
 export const TODO_STATUS = {
@@ -120,6 +121,10 @@ export function todoApp(state = initialState, action) {
       return Object.assign({}, state, { todos: result });
     }
 
+    case UPDATE_SEARCH_QUERY: {
+      return Object.assign({}, state, { searchQuery: action.value });
+    }
+
     default:
       return state
   }
@@ -128,12 +133,20 @@ export function todoApp(state = initialState, action) {
 export function getFilteredTodos(state) {
   const {
     todos,
-    filter
+    filter,
+    searchQuery
   } = state;
+  const conditions = [];
 
-  return filter
-    ? todos.filter((todo) => todo.status === filter)
-    : todos;
+  if (filter) {
+    conditions.push((todo) => todo.status === filter);
+  }
+
+  if (searchQuery) {
+    conditions.push((todo) => todo.text.toLowerCase().includes(searchQuery.toLowerCase()));
+  }
+
+  return conditions ? filterWithConditions(todos, conditions) : todos;
 }
 
 function getNewTodoItem(text, items) {
