@@ -2,9 +2,7 @@
 
 .to-do-item {
   display: flex;
-  align-items: center;
   overflow: hidden;
-  height: 40px;
   padding: 3px;
   margin-bottom: 10px;
   border-radius: 3px;
@@ -22,10 +20,9 @@
   }
 
   &__content {
+    display: flex;
+    align-items: center;
     width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   &__text {
